@@ -2,15 +2,12 @@
 
 127.0.0.1 hello.loc
 
-На этом все )
 
-Запускаем терминал, переходим в нашу папку и запускаем команду:
 
 docker-compose up -d
 
-Переходим по адресу http://hello.loc/ и видим, что все работает.
-
-Можно зайти в Docker-контейнер php и запустить bash, и проверить работает ли git и composer, для этого введем команду:
+Переходим по адресу (nginx)
+http://hello.loc:8080/ 
 
 docker exec -it php bash
 docker exec -it mysql bash

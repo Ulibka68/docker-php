@@ -1,0 +1,24 @@
+# Для начала указываем исходный образ, он будет использован как основа
+FROM php:7.4-fpm
+
+COPY --from=mlocati/php-extension-installer /usr/bin/install-php-extensions /usr/bin/
+
+# RUN выполняет идущую за ней команду в контексте нашего образа.
+# В данном случае мы установим некоторые зависимости и модули PHP.
+# Для установки модулей используем команду docker-php-ext-install.
+# На каждый RUN создается новый слой в образе, поэтому рекомендуется объединять команды.
+RUN apt-get update && apt-get install -y \
+		curl \
+		wget \
+		git \
+	&& install-php-extensions mysqli pdo_mysql gd xdebug @composer imagick uuid zip http
+
+# root (id = 0) is the default user within a container
+# The developer can set a default user to run the first process with the Dockerfile USER instruction.
+# USER www-data:www-data
+
+# Указываем рабочую директорию для PHP
+WORKDIR /var/www
+
+# Запускаем контейнер
+CMD ["php-fpm"]

@@ -28,7 +28,7 @@ services:
   php:
     build:
       context: ./config/php
-      dockerfile: Dockerfile
+      dockerfile: Dockerfile.7.4
     container_name: php
     volumes:
       - ./sites:/var/www
@@ -51,7 +51,7 @@ services:
     # Задаем пароль для root пользователя
     # MYSQL_DATABASE: This variable allows you to specify the name of a database to be created on image startup. If a user name and a password are supplied with
     environment:
-      MYSQL_DATABASE: test
+      MYSQL_DATABASE: laravel
       MYSQL_USER: root
       MYSQL_PASSWORD: root
       MYSQL_ROOT_PASSWORD: root
@@ -59,20 +59,3 @@ services:
     networks:
       - internal
 
-  phpmyadmin:
-    image: phpmyadmin/phpmyadmin
-    container_name: phpmyadmin
-    environment:
-      # PMA_ARBITRARY - when set to 1 connection to the arbitrary server will be allowed
-      PMA_ARBITRARY: 1
-      # PMA_PORT - define port of the MySQL server
-      PMA_PORT: 3306
-      PMA_HOST: mysql
-      # PMA_USER and PMA_PASSWORD - define username to use for config authentication method
-      PMA_USER: root
-      PMA_PASSWORD: root
-    restart: always
-    ports:
-      - 8081:80
-    networks:
-      - internal
