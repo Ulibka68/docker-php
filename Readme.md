@@ -1,23 +1,28 @@
-Не забываем в файле HOSTS добавить:
+# Сборка для разработки на php
+### Состав
+* nginx
+* php 7.4 (composer, xdebug)
+* mysql 8
 
+### Примечание
+Не забываем в файле HOSTS добавить:  
 127.0.0.1 hello.loc
 
-
-
-docker-compose up -d
-
+### Проверка
 Переходим по адресу (nginx)
-http://hello.loc:8080/ 
+http://hello.loc:8080/  
+// phpmyadmin  
+http://hello.loc:8081
+
+### Команды Docker
+пересобрать сборку:
+docker-compose up -d --build
 
 docker exec -it php bash
 docker exec -it mysql bash
 
 docker inspect mysql
-mysql -u root -p
 
-
-пересобрать сборку:
-docker-compose up -d --build
 
 Завершаем работу командой:
 docker-compose down
@@ -30,17 +35,12 @@ docker container ls --all
 или  
 docker ps -a
 
-DOCKER создает две папки дистрибутив для хранения данных:
-\WSL $ \доккер-десктоп
-\WSL $ \доккер-десктоп-Дата
+// лог для mysql
+docker logs mysql
 
-// phpmyadmin  
-http://hello.loc:8081
-// Laravel
-http://hello.loc:8080
 
+### Ссылка на прототип
 mklink /D J:\_prg\wsl\root \\wsl$\Ubuntu20.04\root\_prj
-
 
 https://tretyakov.net/post/ustanavlivaem-phpmyadmin-s-pomoshhyu-docker/
 
